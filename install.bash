@@ -62,7 +62,7 @@ function setup_git() {
 
 # Adds a symbolic link to files in ~/.dotfiles to your home directory.
 function symlink_files() {
-  ignoredfiles=(README.md install.bash update-zsh.sh Brewfile Brewfile.lock.json)
+  ignoredfiles=(README.md install.bash update-zsh.sh)
 
   for f in $(ls -d *); do
     if [[ ${ignoredfiles[@]} =~ $f ]]; then
@@ -109,17 +109,18 @@ set -e
 
   determine_shell
   if [[ $LOGIN_SHELL == 'zsh' ]] ; then
-    linuxpackages=(${packages[@]} 'zsh')
+    packages=(${packages[@]} 'zsh')
   fi
 
   if [[ $OSPACKMAN == "homebrew" ]]; then
     echo "You are running homebrew."
     echo "Using Homebrew to install packages..."
     brew update
-    declare -a macospackages=('python')
-    brew install "${linuxpackages[@] macpackages[@]}"
+    declare -a extra=('python')
+    brew install "${packages[@] extra[@]}"
     echo "Installing casks"
-    brew bundle
+    declare -a casks=("1password" "firefox" "google-chrome" "obsidian" "slack" "visual-studio-code" "warp")
+    brew install --cask ${casks[@]}
     brew cleanup
   else
     echo "Could not determine OS. Exiting..."
@@ -142,5 +143,4 @@ set -e
     echo "Reloading session"
     exec zsh
   fi
-
 )
