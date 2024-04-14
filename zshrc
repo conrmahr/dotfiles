@@ -5,7 +5,7 @@ export DOTFILES=$HOME/.dotfiles
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
+export ZSH="$DOTFILES/oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -66,14 +66,20 @@ ZSH_THEME="robbyrussell"
 HIST_STAMPS="dd/mm/yyyy"
 
 # Would you like to use another custom folder than $ZSH/custom?
-ZSH_CUSTOM=$DOTFILES
+#ZSH_CUSTOM=$DOTFILES
 
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(aws git gh npm ssh)
+plugins=(
+  aws
+  brew
+  gcloud
+  git
+  npm
+)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -86,11 +92,23 @@ export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+else
+  export EDITOR='vi'
+fi
+
+# homebrew
+export PATH="/opt/homebrew/bin:$PATH"
+export PATH="/opt/homebrew/sbin:$PATH"
+export PATH="/opt/homebrew/opt/ssh-copy-id/bin:$PATH"
+export PATH="/opt/homebrew/opt/openssl@3/bin:$PATH"
+export PATH="/opt/homebrew/opt/curl/bin:$PATH"
+export PNPM_HOME="$HOME/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -103,3 +121,15 @@ export LANG=en_US.UTF-8
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+# productivity
+alias hg='history | grep'
+alias sites='cd ~/Sites'
+alias ic='cd ~/Library/Mobile\ Documents/com~apple~CloudDocs'
+# homebrew
+alias bup='brew update'
+alias bupg='brew upgrade'
+alias bdr='brew doctor'
+alias bcu='brew cleanup'
+alias bout='brew outdated'
+alias bser='brew services'

@@ -9,8 +9,7 @@ function determine_package_manager() {
   }
 }
 
-# function setup_bash() {
-# }
+# function setup_bash()
 
 function setup_zsh() {
   echo 'Adding ohmyzsh to dotfiles...'
@@ -61,10 +60,9 @@ function setup_git() {
   git config --global init.defaultBranch main
 }
 
-# Adds a symbolic link to files in ~/.dotfiles
-# to your home directory.
+# Adds a symbolic link to files in ~/.dotfiles to your home directory.
 function symlink_files() {
-  ignoredfiles=(LICENSE README.md install.bash update-zsh.sh)
+  ignoredfiles=(README.md install.bash update-zsh.sh Brewfile Brewfile.lock.json)
 
   for f in $(ls -d *); do
     if [[ ${ignoredfiles[@]} =~ $f ]]; then
@@ -107,21 +105,21 @@ set -e
 (
   determine_package_manager
   # general package array
-  declare -a packages=('vim' 'git' 'tree' 'htop' 'wget' 'curl')
+  declare -a packages=('vim' 'git' 'gh' 'tree' 'htop' 'wget' 'curl')
 
   determine_shell
-  if [[ $LOGIN_SHELL == 'bash' ]] ; then
-    packages=(${packages[@]} 'bash')
-  elif [[ $LOGIN_SHELL == 'zsh' ]] ; then
-    packages=(${packages[@]} 'zsh')
+  if [[ $LOGIN_SHELL == 'zsh' ]] ; then
+    linuxpackages=(${packages[@]} 'zsh')
   fi
 
   if [[ $OSPACKMAN == "homebrew" ]]; then
     echo "You are running homebrew."
     echo "Using Homebrew to install packages..."
     brew update
-    declare -a macpackages=('findutils' 'macvim' 'the_silver_searcher')
-    brew install "${packages[@]}" "${macpackages[@]}"
+    declare -a macospackages=('python')
+    brew install "${linuxpackages[@] macpackages[@]}"
+    echo "Installing casks"
+    brew bundle
     brew cleanup
   else
     echo "Could not determine OS. Exiting..."

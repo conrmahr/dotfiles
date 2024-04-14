@@ -1,6 +1,6 @@
 #! /bin/bash
 
-OMZDIR=~/.dotfiles/ohmyzsh
+OMZDIR=~/.dotfiles/oh-my-zsh
 
 if [ -d "$OMZDIR" ] ; then
   echo 'Updating ohmyzsh to latest version'
