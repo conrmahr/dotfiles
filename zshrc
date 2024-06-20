@@ -74,9 +74,7 @@ HIST_STAMPS="dd/mm/yyyy"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  aws
   brew
-  gcloud
   git
   npm
 )
@@ -125,11 +123,4 @@ esac
 # productivity
 alias hg='history | grep'
 alias sites='cd ~/Sites'
-alias ic='cd ~/Library/Mobile\ Documents/com~apple~CloudDocs'
-# homebrew
-alias bup='brew update'
-alias bupg='brew upgrade'
-alias bdr='brew doctor'
-alias bcu='brew cleanup'
-alias bout='brew outdated'
-alias bser='brew services'
+alias icloud='cd ~/Library/Mobile\ Documents/com~apple~CloudDocs'
