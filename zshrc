@@ -121,6 +121,8 @@ esac
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # productivity
+alias zs='source ~/.zshrc'
+alias zv='vim ~/.zshrc'
 alias hg='history | grep'
 alias sites='cd ~/Sites'
 alias icloud='cd ~/Library/Mobile\ Documents/com~apple~CloudDocs'
