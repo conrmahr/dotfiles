@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/bin/bash
 
 OMZDIR=~/.dotfiles/oh-my-zsh
 

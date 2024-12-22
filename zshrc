@@ -102,11 +102,8 @@ export PATH="/opt/homebrew/sbin:$PATH"
 export PATH="/opt/homebrew/opt/ssh-copy-id/bin:$PATH"
 export PATH="/opt/homebrew/opt/openssl@3/bin:$PATH"
 export PATH="/opt/homebrew/opt/curl/bin:$PATH"
-export PNPM_HOME="$HOME/Library/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
+export PATH="/opt/homebrew/opt/node@22/bin:$PATH"
+export PATH="/opt/homebrew/opt/pnpm/bin:$PATH"
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"

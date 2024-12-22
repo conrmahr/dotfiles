@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/bin/bash
 
 # Function to determine package manager
 function determine_package_manager() {
@@ -8,8 +8,6 @@ function determine_package_manager() {
     return;
   }
 }
-
-# function setup_bash()
 
 function setup_zsh() {
   echo 'Adding ohmyzsh to dotfiles...'
@@ -105,7 +103,7 @@ set -e
 (
   determine_package_manager
   # general package array
-  declare -a packages=('vim' 'git' 'gh' 'tree' 'htop' 'wget' 'curl')
+  declare -a packages=('vim' 'git' 'gh' 'tree' 'htop' 'wget' 'curl' 'rsync' 'speedtest' 'openssl@3' 'ssh-copy-id' 'node@22' 'pnpm')
 
   determine_shell
   if [[ $LOGIN_SHELL == 'zsh' ]] ; then
@@ -119,7 +117,7 @@ set -e
     declare -a extra=('python')
     brew install "${packages[@] extra[@]}"
     echo "Installing casks"
-    declare -a casks=("1password" "firefox" "google-chrome" "obsidian" "slack" "visual-studio-code" "warp")
+    declare -a casks=('1password' 'firefox' 'google-chrome' 'obsidian' 'slack' 'visual-studio-code' 'warp')
     brew install --cask ${casks[@]}
     brew cleanup
   else
