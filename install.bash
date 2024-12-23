@@ -40,22 +40,27 @@ function determine_shell() {
 }
 
 function setup_vim() {
-  echo "Setting up vim...ignore any vim errors post install"
+  echo "Setting up vim... ignore any vim errors post install"
   vim +BundleInstall +qall
 }
 
+# Check git config is setup
 function setup_git() {
-  echo 'Setting up git config...'
-  read -p 'Enter Github username: ' GIT_USER
-  git config --global user.name "$GIT_USER"
-  read -p 'Enter email: ' GIT_EMAIL
-  git config --global user.email $GIT_EMAIL
-  git config --global core.editor vim
-  git config --global color.ui true
-  git config --global color.diff auto
-  git config --global color.status auto
-  git config --global color.branch auto
-  git config --global init.defaultBranch main
+    if [[ ! $(git config --get user.name) ]] || [[ ! $(git config --get user.email) ]]; then
+      echo 'Setting up git config...'
+      read -p 'Enter Github username: ' GIT_USER
+      git config --global user.name "$GIT_USER"
+      read -p 'Enter email: ' GIT_EMAIL
+      git config --global user.email $GIT_EMAIL
+      git config --global core.editor vim
+      git config --global color.ui true
+      git config --global color.diff auto
+      git config --global color.status auto
+      git config --global color.branch auto
+      git config --global init.defaultBranch main
+    else
+      echo "Git config already set up."
+    fi
 }
 
 # Adds a symbolic link to files in ~/.dotfiles to your home directory.
@@ -104,6 +109,7 @@ set -e
   determine_package_manager
   # general package array
   declare -a packages=('vim' 'git' 'gh' 'tree' 'htop' 'wget' 'curl' 'rsync' 'speedtest' 'openssl@3' 'ssh-copy-id' 'node@22' 'pnpm')
+  declare -a casks=('1password' 'firefox' 'google-chrome' 'obsidian' 'slack' 'visual-studio-code' 'warp')
 
   determine_shell
   if [[ $LOGIN_SHELL == 'zsh' ]] ; then
@@ -114,11 +120,17 @@ set -e
     echo "You are running homebrew."
     echo "Using Homebrew to install packages..."
     brew update
-    declare -a extra=('python')
-    brew install "${packages[@] extra[@]}"
+    for i in "${packages[@]}"
+    do
+      echo "Checking if $i is installed..."
+      brew list --versions "$i" >/dev/null || brew install "$i"
+    done
     echo "Installing casks"
-    declare -a casks=('1password' 'firefox' 'google-chrome' 'obsidian' 'slack' 'visual-studio-code' 'warp')
-    brew install --cask ${casks[@]}
+    for i in "${casks[@]}"
+    do
+      echo "Checking if $i is installed..."
+      brew list --versions --cask "$i" >/dev/null || brew install --cask "$i"
+    done
     brew cleanup
   else
     echo "Could not determine OS. Exiting..."
