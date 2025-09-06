@@ -95,6 +95,9 @@ else
   export EDITOR='vi'
 fi
 
+# claude
+export PATH="~/.local/bin:$PATH"
+
 # homebrew
 export PATH="/opt/homebrew/bin:$PATH"
 export PATH="/opt/homebrew/sbin:$PATH"
