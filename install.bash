@@ -108,8 +108,8 @@ set -e
 (
   determine_package_manager
   # general package array
-  declare -a packages=('vim' 'git' 'gh' 'tree' 'htop' 'wget' 'curl' 'rsync' 'speedtest' 'openssl@3' 'ssh-copy-id' 'node@22' 'pnpm')
-  declare -a casks=('1password' 'firefox' 'google-chrome' 'obsidian' 'slack' 'visual-studio-code' 'warp')
+  declare -a packages=('vim' 'git' 'gh' 'tree' 'htop' 'wget' 'curl' 'rsync' 'openssl@3' 'ssh-copy-id' 'node@24' 'pnpm')
+  declare -a casks=('1password' 'arc' 'firefox' 'google-chrome' 'obsidian' 'raycast' 'slack' 'visual-studio-code' 'warp')
 
   determine_shell
   if [[ $LOGIN_SHELL == 'zsh' ]] ; then
