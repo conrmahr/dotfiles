@@ -98,7 +98,7 @@ fi
 # homebrew
 eval "$(/opt/homebrew/bin/brew shellenv)"
 export PATH="/opt/homebrew/opt/pnpm/bin:$PATH"
-export PATH="/opt/homebrew/opt/node@24:$PATH"
+export PATH="/opt/homebrew/opt/node@24/bin:$PATH"
 export PATH="/opt/homebrew/opt/curl/bin:$PATH"
 export PATH="/opt/homebrew/opt/openssl@3/bin:$PATH"
 export PATH="/opt/homebrew/opt/ssh-copy-id/bin:$PATH"
