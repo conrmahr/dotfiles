@@ -97,8 +97,11 @@ fi
 
 # homebrew
 eval "$(/opt/homebrew/bin/brew shellenv)"
-export PATH="/opt/homebrew/opt/pnpm/bin:/opt/homebrew/opt/node@24/bin:/opt/homebrew/opt/curl/bin:/opt/homebrew/opt/openssl@3/bin:/opt/homebrew/opt/ssh-copy-id/bin:$PATH"
-
+export PATH="/opt/homebrew/opt/pnpm/bin:$PATH"
+export PATH="/opt/homebrew/opt/node@24:$PATH"
+export PATH="/opt/homebrew/opt/curl/bin:$PATH"
+export PATH="/opt/homebrew/opt/openssl@3/bin:$PATH"
+export PATH="/opt/homebrew/opt/ssh-copy-id/bin:$PATH"
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
