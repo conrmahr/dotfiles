@@ -102,6 +102,10 @@ export PATH="/opt/homebrew/opt/node@24/bin:$PATH"
 export PATH="/opt/homebrew/opt/curl/bin:$PATH"
 export PATH="/opt/homebrew/opt/openssl@3/bin:$PATH"
 export PATH="/opt/homebrew/opt/ssh-copy-id/bin:$PATH"
+if [ -d "/opt/homebrew/opt/ruby/bin" ]; then
+  export PATH=/opt/homebrew/opt/ruby/bin:$PATH
+  export PATH=`gem environment gemdir`/bin:$PATH
+fi
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
