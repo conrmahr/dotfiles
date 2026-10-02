@@ -1,0 +1,14 @@
+# Example custom zsh file
+# Add your local aliases, functions, and settings here
+# These files are automatically sourced but ignored by git
+
+# Example alias:
+# alias myalias='some command'
+
+# Example function:
+# myfunc() {
+#   echo "Hello from custom zsh"
+# }
+
+# Example export:
+# export MY_VAR="value"

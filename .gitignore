@@ -1,4 +1,4 @@
 .DS_Store
 Brewfile.lock.json
 zsh/custom/*
-!zsh/custom/example.zsh
+!zsh/custom/example.zsh.sample
