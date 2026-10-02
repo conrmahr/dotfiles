@@ -9,21 +9,6 @@ function determine_package_manager() {
   }
 }
 
-function setup_zsh() {
-  echo 'Adding ohmyzsh to dotfiles...'
-  OMZDIR=~/.dotfiles/oh-my-zsh
-
-  if [ -d "$OMZDIR" ] ; then
-    echo 'Updating ohmyzsh to latest version'
-    cd ~/.dotfiles/oh-my-zsh
-    git pull origin master
-    cd -
-  else
-    echo 'Adding ohmyzsh to dotfiles...'
-    git clone https://github.com/ohmyzsh/ohmyzsh.git oh-my-zsh
-  fi
-}
-
 function determine_shell() {
   echo 'Please pick your favorite shell:'
   echo '(1) Bash'
@@ -39,9 +24,19 @@ function determine_shell() {
   fi
 }
 
-function setup_vim() {
-  echo "Setting up vim... ignore any vim errors post install"
-  vim +BundleInstall +qall
+# Installs the MesloLGS NF font recommended by powerlevel10k.
+function setup_font() {
+  echo "Installing MesloLGS NF font..."
+  local font_dir="$HOME/Library/Fonts"
+  local base_url="https://github.com/romkatv/powerlevel10k-media/raw/master"
+
+  for style in Regular Bold Italic "Bold%20Italic"; do
+    local name
+    name=$(echo "$style" | sed 's/%20/ /')
+    if [[ ! -f "$font_dir/MesloLGS NF $name.ttf" ]]; then
+      curl -fsSL -o "$font_dir/MesloLGS NF $name.ttf" "$base_url/MesloLGS%20NF%20${style}.ttf"
+    fi
+  done
 }
 
 # Check git config is setup
@@ -65,16 +60,12 @@ function setup_git() {
 
 # Adds a symbolic link to files in ~/.dotfiles to your home directory.
 function symlink_files() {
-  ignoredfiles=(README.md install.bash update-zsh.sh)
+  ignoredfiles=(README.md install.bash zsh)
 
   for f in $(ls -d *); do
     if [[ ${ignoredfiles[@]} =~ $f ]]; then
       echo "Skipping $f ..."
-    elif [[ $f =~ 'zshrc' || $f =~ 'oh-my-zsh' ]]; then
-      if [[ $LOGIN_SHELL == 'zsh' ]] ; then
-        link_file $f
-      fi
-    elif [[ $f =~ 'oh-my-zsh' ]]; then
+    elif [[ $f =~ 'zshrc' ]]; then
       if [[ $LOGIN_SHELL == 'zsh' ]] ; then
         link_file $f
       fi
@@ -137,13 +128,9 @@ set -e
     exit 1
   fi
 
-  if [[ $LOGIN_SHELL == 'zsh' ]] ; then
-    setup_zsh
-  fi
-
   setup_git
   symlink_files
-  setup_vim
+  setup_font
 
   if [[ $LOGIN_SHELL == 'zsh' ]] ; then
     echo "Changing shells to ZSH"

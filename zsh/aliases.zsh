@@ -1,0 +1,7 @@
+alias zc='cd ~/.dotfiles'
+alias zs='source ~/.zshrc'
+alias zv='vim ~/.zshrc'
+alias kopy='tr -d "\n" | pbcopy'
+alias please='eval sudo $(fc -ln -1)'
+alias sites='cd ~/Sites'
+alias icloud='cd ~/Library/Mobile\ Documents/com~apple~CloudDocs'
