@@ -5,6 +5,7 @@ fi
 export DOTFILES=$HOME/.dotfiles
 
 setopt PROMPT_SUBST
+setopt NO_BANG_HIST
 
 source "$DOTFILES/zsh/exports.zsh"
 
