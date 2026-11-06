@@ -11,6 +11,5 @@ zinit ice depth=1
 zinit light romkatv/powerlevel10k
 zinit light zsh-users/zsh-autosuggestions
 zinit light baliestridev/pnpm.plugin.zsh
-zinit light SckyzO/zsh-sshinfo
 
 zinit snippet OMZP::brew
