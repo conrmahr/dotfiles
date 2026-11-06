@@ -14,3 +14,21 @@ brews() {
   echo "${formulae}" | sed "s/^\(.*\):\(.*\)$/\1${blue}\2${off}/"
   echo "\n${blue}==>${off} ${bold}Casks${off}\n${casks}"
 }
+
+# Find files by name (case-insensitive, partial match): ff <name> [dir]
+ff() {
+  if [[ -z "$1" ]]; then
+    echo "usage: ff <name> [dir]"
+    return 1
+  fi
+  find "${2:-.}" \( -name .git -o -name node_modules \) -prune -o -iname "*$1*" -print 2>/dev/null
+}
+
+# Find a string inside files (case-insensitive, recursive): fs <text> [dir]
+fs() {
+  if [[ -z "$1" ]]; then
+    echo "usage: fs <text> [dir]"
+    return 1
+  fi
+  grep -rniI --color=auto --exclude-dir={.git,node_modules} -- "$1" "${2:-.}"
+}
