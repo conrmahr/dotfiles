@@ -21,8 +21,8 @@ alias cpwd='pwd | tr -d "\n" | pbcopy'
 
 # .dotfiles
 alias zc='cd ~/.dotfiles/zsh'
-alias zs='source ~/.zshrc'
-alias zv='exec zsh'
+alias zv='vim ~/.dotfiles/zsh'
+alias zs='exec zsh'
 
 # Miscellaneous
 alias history='history 1'

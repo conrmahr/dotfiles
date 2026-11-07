@@ -13,3 +13,4 @@ zinit light zsh-users/zsh-autosuggestions
 zinit light baliestridev/pnpm.plugin.zsh
 
 zinit snippet OMZP::brew
+zinit snippet OMZP::git
