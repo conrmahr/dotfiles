@@ -25,5 +25,6 @@ alias zs='source ~/.zshrc'
 alias zv='exec zsh'
 
 # Miscellaneous
+alias history='history 1'
 alias plz='eval sudo $(fc -ln -1)'
 alias ports='lsof -iTCP -sTCP:LISTEN -n -P'
