@@ -1,20 +1,3 @@
-hs() {
-  history 1 | grep --color=auto -i -- "$1"
-}
-
-brews() {
-  local formulae="$(brew leaves | xargs brew deps --installed --for-each)"
-  local casks="$(brew list --cask 2>/dev/null)"
-
-  local blue="$(tput setaf 4)"
-  local bold="$(tput bold)"
-  local off="$(tput sgr0)"
-
-  echo "${blue}==>${off} ${bold}Formulae${off}"
-  echo "${formulae}" | sed "s/^\(.*\):\(.*\)$/\1${blue}\2${off}/"
-  echo "\n${blue}==>${off} ${bold}Casks${off}\n${casks}"
-}
-
 # Find files by name (case-insensitive, partial match): ff <name> [dir]
 ff() {
   if [[ -z "$1" ]]; then
@@ -32,3 +15,30 @@ fs() {
   fi
   grep -rniI --color=auto --exclude-dir={.git,node_modules} -- "$1" "${2:-.}"
 }
+
+# Search aliases by name or command (case-insensitive): fa <text>
+fa() {
+  if [[ -z "$1" ]]; then
+    echo "usage: fa <text>"
+    return 1
+  fi
+  alias | grep --color=auto -i -- "$1"
+}
+
+hs() {
+  history 1 | grep --color=auto -i -- "$1"
+}
+
+brews() {
+  local formulae="$(brew leaves | xargs brew deps --installed --for-each)"
+  local casks="$(brew list --cask 2>/dev/null)"
+
+  local blue="$(tput setaf 4)"
+  local bold="$(tput bold)"
+  local off="$(tput sgr0)"
+
+  echo "${blue}==>${off} ${bold}Formulae${off}"
+  echo "${formulae}" | sed "s/^\(.*\):\(.*\)$/\1${blue}\2${off}/"
+  echo "\n${blue}==>${off} ${bold}Casks${off}\n${casks}"
+}
+
